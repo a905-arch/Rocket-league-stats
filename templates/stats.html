@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estatísticas</title>
+    <style>
+        img { margin: 10px; border: 1px solid #ccc; }
+        .donuts { display:flex; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    {% if admin %}
+        <h2>Modo Admin</h2>
+        <p>{{ message }}</p>
+        <form method="post">
+            Jogador:
+            <select name="jogador">
+                {% for j in jogadores %}
+                    <option value="{{ j }}">{{ j }}</option>
+                {% endfor %}
+            </select><br/>
+            Data: <input type="text" name="data" placeholder="dd/mm/aaaa"><br/>
+            Golos: <input type="number" name="golos"><br/>
+            Assistências: <input type="number" name="assists"><br/>
+            Wins: <input type="number" name="wins"><br/>
+            1v1: <input type="number" name="1v1"><br/>
+            2v2: <input type="number" name="2v2"><br/>
+            3v3: <input type="number" name="3v3"><br/>
+            Torneios: <input type="number" name="torneios"><br/>
+            Casual: <input type="number" name="casual"><br/>
+            <input type="submit" value="Adicionar Estatísticas">
+        </form>
+    {% endif %}
+
+    <h2>Ranks</h2>
+    <img src="data:image/png;base64,{{ img_ranks }}"/>
+
+    <h2>Estatísticas Globais</h2>
+    <div class="donuts">
+        {% for jogador, img in img_donuts.items() %}
+            <div>
+                <img src="data:image/png;base64,{{ img }}" alt="{{ jogador }}"/>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
